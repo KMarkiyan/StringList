@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "StringList.h"
 
-#define SIZE_OF_NODE (sizeof(char *) *2)
+#define SIZE_OF_NODE (sizeof(char *) * 2)
 
 inline void MemoryFailed()
 {
@@ -163,7 +163,7 @@ void StringListRemoveDuplicates(char** list)
 {
 	StringListSort(list);
 
-	for (int* next = (int*)*list; *(next) != NULL; next = (int*)*next)
+	for (int* next = (int*)*list; *(next) != NULL;)
 	{
 		if (!strcmp((char*)*(next + 1), (char*)*(((int*)*next) + 1)))
 		{
@@ -172,6 +172,10 @@ void StringListRemoveDuplicates(char** list)
 			void* node_to_free = (void*)*next;
 			*next = *((int*)*next);
 			free(node_to_free); 
+		}
+		else
+		{
+			next = (int*)*next;
 		}
 	}
 }
