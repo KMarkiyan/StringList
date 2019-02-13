@@ -3,13 +3,6 @@
 
 #define SIZE_OF_NODE (sizeof(char *) * 2)
 
-inline void MemoryFailed()
-{
-	std::cout << "Memory trouble!\n";
-	system("pause");
-	exit(-1);
-}
-
 void StringListInit(char** list)
 {
 	*list = NULL;
@@ -39,8 +32,6 @@ void StringListDestroy(char** list)
 		free((void*)next);
 		*(int*)(list) = NULL;		
 	}
-
-
 }
 
 void StringListAdd(char** list, char* str)
@@ -73,7 +64,6 @@ int get_StringListSize(char** list)
 {
 	int* next = (int*)(*list);
 	int count = 0;
-
 	while (next != NULL)
 	{
 		count++;
@@ -185,12 +175,15 @@ void Display(char* list)
 	char* next;
 	char* tmp;
 	if (list != nullptr)
-	{	
+	{
+		printf("StringList\n----------\n");
 		while (list != nullptr)
 		{
 			tmp = (char*)*((int*)(list + sizeof(char*)));
 			printf("%s\n", tmp);
-			list = (char*)*((int*)(list));			
+			list = (char*)*((int*)(list));
 		}
 	}
+	else
+		printf("List is empty\n");
 }
